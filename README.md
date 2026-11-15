@@ -1,97 +1,53 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Doomscroll Duel
 
-# Getting Started
+Challenge your friends to see who can use their phone the least! Use your competitive drive as a means of staying off your phone.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+> Built for HackUMass XIV. **Android only.**
 
-## Step 1: Start Metro
+- **Demo video:** [[VIDEO LINK]](https://youtu.be/WFFug_8RlhQ)
+- **Download the APK:** https://drive.google.com/file/d/168HX55O8NPkwria-aQM2tKcivCQPL-Gr/view?usp=sharing
+- **Devpost:** https://devpost.com/software/doomscroll-duel
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Inspiration
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+My roommate and I had serious screen addiction problems. So we competed to see who could use their phone the least over the span of one week. It ended up having tremendous results, with both of us using our phone for less than 10 hours over the span of the whole week. I thought I would bring this idea to life in a mobile app to gamify staying off your phone.
 
-```sh
-# Using npm
-npm start
+## What it does
 
-# OR using Yarn
-yarn start
-```
+Doomscroll Duel is an app where you challenge your friends to a screentime battle. It tracks your screen usage and compares it with your opponent's. You add friends by username, set a daily goal, and challenge them to battles with a chosen length, excluded apps and stakes. The home screen shows a 7-day chart, your streak and a leaderboard.
 
-## Step 2: Build and run your app
+## Try it
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1. On an Android phone, download the APK from the link above.
+2. Open the file and allow **Install unknown apps** when Android asks. If Google Play Protect warns that the app was not scanned, tap **Install anyway**.
+3. Create an account (any email and password) and pick a username and a daily goal.
+4. Grant **Usage Access** when prompted (Profile has a button too). The app needs it to read your real screen time.
+5. To try a battle you need a second account: add a friend by username, then send them a challenge.
 
-### Android
 
-```sh
-# Using npm
-npm run android
+## How I built it
 
-# OR using Yarn
-yarn android
-```
+I used React Native in VS Code and Android Studio emulator to test the app through development. I also used Firebase as my database, allowing for account creation, adding friends, and storing screen time data. The UI is modeled on the "Leaderboard Spinning App Gamified" kit from the Figma Community, by Pritam Maji.
 
-### iOS
+**Tech:** React Native (TypeScript), Kotlin (native `UsageStats` module), Firebase Authentication and Cloud Firestore, Android Studio.
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## Challenges I ran into
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Getting accurate screen time. Android's aggregated usage stats overcounted by about 100 minutes compared with Digital Wellbeing. I caught the mismatch by checking against Digital Wellbeing app by app, then worked with Claude to write a native Kotlin module that reads raw usage events and ends sessions when the screen turns off, and I tested it on my phone until the numbers matched. Coming from web React, I also had to learn native Android setup, permissions, and Firestore security rules, since the app has no backend server.
 
-```sh
-bundle install
-```
+## Accomplishments that I'm proud of
 
-Then, and every time you update your native dependencies, run:
+The app works end to end on real phones: accounts, friend requests, battle invitations, and live syncing through Firestore, using real screen time. It ships as an installable APK.
 
-```sh
-bundle exec pod install
-```
+## What I learned
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+I spent two months leading up to this event learning React from an online tutorial series, and this project taught me native Android modules, permissions and Firestore security rules. I think it's safe to say the tutorials paid off. I am quite happy with my progress in this project, as well as my individual skills.
 
-```sh
-# Using npm
-npm run ios
+## What's next for Doomscroll Duel
 
-# OR using Yarn
-yarn ios
-```
+Release on the Google Play Store, as well as developing an iOS version (harder because of Apple restrictions). Also on the list: background syncing, push notifications for challenges, and privacy rules so players can only read data from friends they battle.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+## Credits
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- UI design inspired by the "Leaderboard Spinning App Gamified" kit on the Figma Community, by Pritam Maji.
+- Font: Plus Jakarta Sans.
